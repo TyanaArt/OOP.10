@@ -1,16 +1,36 @@
 public class Radio {
+
     protected int currentVolume;
+    protected int maxVolume;
+    protected int minVolume;
     protected int currentStation;
+    protected int maxStation;
+    protected int minStation;
+
+    public Radio() {
+        maxVolume = 10;
+        minVolume = 0;
+        maxStation = 9;
+        minStation = 0;
+
+    }
+
+    public Radio(int countStation) {
+        maxStation = countStation - 1;
+        //this.countStation = countStation;
+        maxVolume = 100;
+
+    }
 
     public int getCurrentVolume() {
         return currentVolume;
     }
 
     public void setCurrentVolume(int currentVolume) {
-        if (currentVolume < 0) {
+        if (currentVolume < minVolume) {
             return;
         }
-        if (currentVolume > 10) {
+        if (currentVolume > maxVolume) {
             return;
         }
 
@@ -18,18 +38,18 @@ public class Radio {
     }
 
     public void enlarge() {
-        if (currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             currentVolume++;
         } else {
-            currentVolume = 10;
+            currentVolume = maxVolume;
         }
     }
 
-    public void reduse() {
-        if (currentVolume > 0) {
+    public void reduce() {
+        if (currentVolume > minVolume) {
             currentVolume--;
         } else {
-            currentVolume = 0;
+            currentVolume = minVolume;
         }
     }
 
@@ -38,29 +58,30 @@ public class Radio {
     }
 
     public void setCurrentStation(int currentStation) {
-        if(currentStation < 0) {
+        if(currentStation < minStation) {
             return;
         }
-        if (currentStation > 9) {
-            return;
+        if (currentStation > maxStation) {
+            return ;
         }
 
         this.currentStation = currentStation;
     }
 
     public void next() {
-        if (currentStation < 9){
+
+        if (currentStation < maxStation){
             currentStation++;
         } else {
-            currentStation = 0;
+            currentStation = minStation;
         }
     }
 
     public void prev() {
-        if (currentStation > 0){
+        if (currentStation > minStation){
             currentStation--;
         } else {
-            currentStation = 9;
+            currentStation = maxStation;
         }
     }
 }
